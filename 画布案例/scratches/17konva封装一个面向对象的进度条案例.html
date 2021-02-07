@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象的进度条案例</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="./js/konva.min.js"></script>
+    <script src="./js/ProgressBar.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<!--存放convas画布的容器-->
+<script>
+    // Windows 系统下 WebStorm 格式化代码的快键键为：Ctrl + Alt + l
+
+    //创建一个舞台
+    var stage = new Konva.Stage({
+        container: 'container',  //上面盒子的id
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    // 创建一个图层,一个舞台可以有多个层,如背景层动画层光照层等
+    var layer = new Konva.Layer();
+    var option = {
+        x: 1 / 8 * stage.width(),
+        y: 1 / 2 * stage.height(),
+        w: 3 / 4 * stage.width(),
+        h: 1 / 12 * stage.height(),
+        fillStyle: "red",
+        strokeStyle: "blue",
+    }
+    var p = new ProgressBar(option)
+    p.addToGroupOrLayer(layer)
+    p.changeValue(70)
+
+    stage.add(layer)
+
+
+</script>
+
+</body>
+</html>

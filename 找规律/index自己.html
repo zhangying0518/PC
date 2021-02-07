@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+  table {border-collapse:collapse;}
+		td{
+      border: 1px solid red;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+    }
+	</style>
+</head>
+<body>
+	<table id="app">
+		<tr v-for="(arrs,index) in message">
+      <td v-for="(arr,index) in arrs">{{arr}}</td>
+    </tr>
+	</table>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: ''
+  },
+  mounted(){
+    this.produce(49,7)
+  },
+  methods: {
+   produce(total, column) {
+    const row = total / column // 行
+    if (row / 2 == 0 || column / 2 == 0) {
+        return;
+    }
+    const oX = parseInt(row / 2) // 1的x坐标
+    const oY = parseInt(column / 2) // 1的y坐标
+
+    // 最大越界值
+    const boundaryX = row - oX - 1
+    const boundaryY = column - oY - 1
+
+    // 存放数组
+    let arr = []
+
+    // 生成二维数组
+    for(let i = 0;i<row;i++){
+      arr.push([])
+    }
+
+    let current = 1
+
+    for (let x = 0; x <= boundaryX; x++) {
+        if (x === 0) { // 先右后左
+            arr[oX + x][oY] = current++
+            for (let y = 1; y <= boundaryY; y++) {
+                // 先下后上 oY + y表示上行 oY - y表示下行
+                arr[oX + x][oY + y] = current++
+                arr[oX - x][oY - y] = current++
+            }
+        } else { // 先右后左 // 右列 oX + x表示当前列的x坐标
+            arr[oX + x][oY] = current++
+            for (let y = 1; y <= boundaryY; y++) {
+                arr[oX + x][oY + y] = current++
+                arr[oX + x][oY - y] = current++
+            }
+            // 左列 oX - x表示当前列的x坐标
+            arr[oX - x][oY] = current++
+            for (let y = 1; y <= boundaryY; y++) {
+                arr[oX - x][oY + y] = current++
+                arr[oX - x][oY - y] = current++
+            }
+        }
+    }
+    var newArray = arr[0].map(function(col, i) {
+      return arr.map(function(row) {
+        return row[i];
+      })
+    });
+    this.message = newArray
+    console.log("this.message",this.message)
+  }
+  }
+})
+		
+	</script>
+</body>
+</html>

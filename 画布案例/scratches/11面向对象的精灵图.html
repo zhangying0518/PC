@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象的精灵图</title>
+    <script src="./js/Sprite.js"></script>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+<button id="left">左</button>
+<button id="right">右</button>
+<button id="up">后</button>
+<button id="down">前</button>
+<script>
+    (function (){
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 600
+        canvas.style.border = "1px solid red"
+
+        var s = new Sprite({
+            x:200,
+            y:200,
+            w:80,
+            h:130,
+            fps:10,
+            originW:40,
+            originH:65,
+            imgSrc:"imgs/DMMban.png"
+        })
+        s.render(ctx)
+
+        // 绑定按钮的点击事件
+        var left = document.getElementById("left")
+        var right = document.getElementById("right")
+        var up = document.getElementById("up")
+        var down = document.getElementById("down")
+        left.onclick = function (){
+            s.changeDir("1")
+        }
+        right.onclick = function (){
+            s.changeDir("2")
+        }
+        up.onclick = function (){
+            s.changeDir("3")
+        }
+        down.onclick = function (){
+            s.changeDir("0")
+        }
+    }())
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>矩形</title>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+
+<script>
+    (function () {
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 600
+        canvas.style.border = "1px solid red"
+        // ctx.rect(x,y,w,h)//前两个参数是x,y的坐标，后两个参数是矩形的宽高
+        ctx.rect(100, 100, 50, 50)
+        ctx.stroke()
+
+        // 描边矩形，差不多就是前面两句的连写
+        ctx.strokeRect(200, 200, 100, 150)
+
+        // 填充矩形
+        ctx.fillRect(300, 300, 40, 40)
+    }())
+
+
+</script>
+</body>
+</html>

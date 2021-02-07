@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>画布的其他api</title>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+<script>
+    (function (){
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 600
+        canvas.style.border = "1px solid red"
+
+        // 设置阴影
+        // ctx.fillStyle = "rgba(255,0,0,.9)"
+        // ctx.shadowColor = "#666"
+        // ctx.shadowBlur = 20
+        // ctx.shadowOffsetX = 10
+        // ctx.shadowOffsetY = 10
+        // ctx.fillRect(100,100,100,100)
+
+        // 线性渐变
+        // var grd = ctx.createLinearGradient(0,0,170,0)//创建一个线性渐变,前面两个参数是一个点，后面两个参数是另一个点，只有两个点确定一条直线
+        // grd.addColorStop(0,"black")
+        // grd.addColorStop(.5,"red")
+        // grd.addColorStop(1,"green")//添加一个渐变颜色，0的时候是黑色，中间是red,1的时候是绿色
+        // ctx.fillStyle = grd //填充的样式为渐变的样式
+        // ctx.fillRect(0,0,300,300)
+
+        // 圆形渐变
+        var rlg = ctx.createRadialGradient(300,300,10,300,300,200)
+        rlg.addColorStop(0,"teal")
+        rlg.addColorStop(.4,"navy")
+        rlg.addColorStop(1,"purple")
+        ctx.fillStyle = rlg
+        ctx.fillRect(100,100,500,500)
+
+    }())
+</script>
+</body>
+</html>

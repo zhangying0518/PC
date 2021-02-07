@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象webitcast案例</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="./js/konva.min.js"></script>
+    <script src="js/CircleText.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    var stage = new Konva.Stage({
+        container: 'container',  //上面盒子的id
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    // 中心坐标
+    var cenX = stage.width() / 2
+    var cenY = stage.height() / 2
+
+    // 创建背景层
+    var bgLayer = new Konva.Layer()
+
+    // 内外圆环半径
+    var innerRadius = 252 / 2 //内环的半径
+    var outerRadius = 220 //外环的半径
+
+    // 创建内环圆
+    var innerCircle = new Konva.Circle({
+        x: cenX,
+        y: cenY,
+        radius: innerRadius,
+        stroke: '#ccc',
+        strokeWidth: 4,
+        dash: [10, 4]//设置虚线，10像素实线，4像素空
+    })
+    bgLayer.add(innerCircle)
+
+    // 创建外环圆
+    var outerCircle = new Konva.Circle({
+        x: cenX,
+        y: cenY,
+        radius: outerRadius,
+        stroke: '#ccc',
+        strokeWidth: 4,
+        dash: [10, 4]//设置虚线，10像素实线，4像素空
+    })
+    bgLayer.add(outerCircle)
+
+    // 创建中心圆
+    var cenCircle = new Konva.Circle({
+        x: cenX,
+        y: cenY,
+        radius: 132 / 2,
+        fill: '#525A82'
+    })
+    bgLayer.add(cenCircle)
+
+    // // 创建圆环
+    // var cenRing= new Konva.Ring({
+    //     x: cenX,
+    //     y: cenY,
+    //     innerRadius:132/2,
+    //     outerRadius:90,
+    //     fill: '#e1e1e1',
+    //     opacity:.5
+    // })
+    // bgLayer.add(cenRing)
+    //
+    //
+    // // 创建中心圆的文字
+    // var cenText = new Konva.Text({
+    //     x: cenX -90,
+    //     y: cenY-8,
+    //     width: 180,
+    //     align:'center',
+    //     text:'web前站',
+    //     fontSize:17,
+    //     fontFamily:'微软雅黑',
+    //     fontStyle:'bold',
+    //     fill:'#fff'
+    // })
+    // bgLayer.add(cenText)
+
+    var cenCircleText = new CircleText({
+        x: cenX,
+        y: cenY,
+        innerRadius: 132 / 2,
+        outerRadius: 90,
+        innerStyle: '#525A82',
+        outerStyle: '#e1e1e',
+        text: 'web全站'
+    })
+    cenCircleText.addToGroupOrLayer(bgLayer)
+
+
+    // 动画层
+    var animateLayer = new Konva.Layer()
+    stage.add(animateLayer)
+
+    //添加2环上的小圆
+    var L2_CircleText_css3 = new CircleText({
+        x: cenX + innerRadius * Math.cos(160 * Math.PI / 180),
+        y: cenY + innerRadius * Math.sin(160 * Math.PI / 180),
+        innerRadius: 30,
+        outerRadius: 40,
+        innerStyle: '#faced6',
+        outerStyle: '#e1e1e1',
+        text: 'CSS3'
+    })
+    L2_CircleText_css3.addToGroupOrLayer(animateLayer)
+
+    stage.add(bgLayer)
+
+</script>
+
+</body>
+</html>

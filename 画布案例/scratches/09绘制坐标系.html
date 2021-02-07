@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制坐标系</title>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+<script>
+    (function (){
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 600
+        canvas.style.border = "1px solid red"
+
+        var x0 = 100
+        var y0 = 400
+        var maxHeight = 300
+        var arrowWidth = 10
+
+        // 绘制x轴
+        ctx.beginPath()
+        ctx.strokeStyle = "blue"
+        ctx.moveTo(x0,y0)
+        ctx.lineTo(x0+400,y0)
+        ctx.lineTo(x0+400-arrowWidth,y0+arrowWidth)
+        ctx.moveTo(x0+400,y0)
+        ctx.lineTo(x0+400-arrowWidth,y0-arrowWidth)
+        ctx.stroke()
+
+        // 绘制y轴
+        ctx.moveTo(x0,y0)
+        ctx.lineTo(x0,0)
+        ctx.lineTo(x0+arrowWidth,arrowWidth)
+        ctx.moveTo(x0,0)
+        ctx.lineTo(x0-arrowWidth,arrowWidth)
+        ctx.stroke()
+
+        // 绘制线段
+        ctx.beginPath()
+        var data = [.4,.5,.8,.7]
+        var pointWidth = 400/(data.length+1)
+        ctx.moveTo(x0+pointWidth,maxHeight*data[0])
+        ctx.beginPath()
+        for(var i=1;i<data.length+1;i++){
+            var x= x0+i*pointWidth
+            var y = y0-maxHeight*data[i-1]
+            ctx.lineTo(x,y)
+        }
+        ctx.stroke()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }())
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象的矩形</title>
+    <script src="./js/ItcastRect.js"></script>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem1">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+    <canvas id="cavsElem2">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+    <img src="" id="imgId">
+</div>
+<script>
+    (function (){
+        var canvas1 = document.getElementById("cavsElem1")
+        var canvas2 = document.getElementById("cavsElem2")
+
+        var ctx1 = canvas1.getContext('2d')
+        var ctx2 = canvas2.getContext('2d')
+
+        canvas1.width = 400
+        canvas1.height = 400
+        canvas1.style.border = "1px solid red"
+
+        canvas2.width = 400
+        canvas2.height = 400
+        canvas2.style.border = "1px solid red"
+
+        var rect = new ItcastRect({
+            x:100,
+            y:100,
+            w:50,
+            h:50,
+            rotation:60,
+            opacity:.6,
+            scaleX:1.5,
+            scaleY:1.5,
+            strokeStyle:"red",
+            fillStyle:"purple",
+        })
+        rect.render(ctx1)
+
+        // 画十个矩形
+        // for(var i=0;i<10;i++){
+        //     var r = new ItcastRect({
+        //         x : Math.random() * 100,
+        //         y : Math.random() * 100,
+        //         w : Math.random() * 100,
+        //         h : Math.random() * 100,
+        //         rotation : Math.random() * 90,
+        //         opacity : Math.random(),
+        //         scaleX : Math.random() * 1.5,
+        //         scaleY : Math.random() * 1.5,
+        //         strokeStyle : "red",
+        //         fillStyle : "purple",
+        //     })
+        //     r.render(ctx1)
+        // }
+
+        // 画一个一直移动的矩形
+        // setInterval(function (){
+        //     ctx1.clearRect(0,0,canvas1.width,canvas1.height)
+        //     rect.x += 10
+        //     if(rect.x>500){
+        //         rect.x = 100
+        //     }
+        //     rect.render(ctx1)
+        // },100)
+
+        // 把一个canvas转成一张图片
+        // var img = document.getElementById("imgId")
+        // img.src = canvas1.toDataURL("image/png",.5)
+
+        // 把一个画布渲染到另一个画布上,把canvas1画到canvas2上
+        ctx2.drawImage(canvas1,0,0)
+
+
+
+
+    }())
+</script>
+</body>
+</html>

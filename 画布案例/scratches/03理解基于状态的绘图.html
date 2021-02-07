@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基于状态的绘图</title>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+
+<script>
+    (function (){
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 600
+        canvas.style.border = "1px solid red"
+
+        ctx.strokeStyle = "red"
+        ctx.lineWidth = 20
+
+        // 第一条线
+        ctx.beginPath()
+        ctx.moveTo(100,100)
+        ctx.lineTo(300,100)
+        ctx.stroke()
+
+        // 第二条线
+        ctx.beginPath()//开一个新路径，也就是开启新状态的绘图。开启一个新状态时，新状态可以继承之前状态的样式，
+        // 但是新状态设置的所有样式，只能作用于新的状态。如果不开启新状态，那么后面设置的样式会覆盖前面的样式，按理说，第一条直线绘制之前
+        // 也应该开启新状态，但是由于是第一个，所有默认会有一个，就不用再开启新状态，当然还是建议写上去，为了规范
+        ctx.strokeStyle = "green"
+        ctx.moveTo(100,200)
+        ctx.lineTo(300,200)
+        ctx.stroke()
+
+    }())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

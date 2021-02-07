@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象的使用</title>
+</head>
+<body>
+<script>
+    // new的原理
+    // new了一个构造函数，如var eg = new Sprite()
+    // new了之后的步骤是这样的
+    // 1.立即执行Sprite构造函数
+    // 0.在内存中开辟一块空间
+    // 1.创建一个新的空对象 如var t = {}
+    // 2.把this指向这个空对象  t = this
+    // 3.把空对象的内部原型指向构造函数的原型对象 this._proto_ = eg.prototype
+    // 4.如果构造函数有返回值，立即把返回值给eg
+    // 5.如果没有返回值，就把构造函数里面的this作为返回值返回给eg,也就是如果没有返回值时，构造函数里面默认有这样一句代码 return this
+    function Sprite(){//在构造函数中添加属性
+        this.name = "222"
+        // return this 默认有这行代码
+    }
+    Sprite.prototype.show = function (){//在原型对象中添加方法，主要是为了节省内存空间
+        console.log("jjjjg",this.name)
+    }
+    var s = new Sprite()
+    s.show()//s.show方法执行的时候，会首先去构造函数中找show()方法，如果有就被调用，如果没有则去原型对象中找show()方法
+
+</script>
+</body>
+</html>

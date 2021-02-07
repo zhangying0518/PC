@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用konva库开发一个矩形</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="./js/konva.min.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    // Windows 系统下 WebStorm 格式化代码的快键键为：Ctrl + Alt + l
+
+    //创建一个舞台
+    var stage = new Konva.Stage({
+        container: 'container',  //上面盒子的id
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    // 创建一个图层
+    var layer = new Konva.Layer();
+    stage.add(layer)
+
+    // 中心坐标
+    var cenX = stage.width() / 2 //在konva中获取数据都是用方法获取
+    var cenY = stage.height() / 2
+
+    var x = 1 / 8 * stage.width()
+    var y = cenY
+
+    var height = 1 / 12 * stage.height()
+    var maxWidth = 3 / 4 * stage.width()
+
+    // 绘制一个进度条的内部矩形
+    var innerRect = new Konva.Rect({
+        x: x,
+        y: y,
+        width: 100,
+        height: height,
+        opactity: .7,
+        fill: "lightblue",
+        cornerRadius: height / 2//圆角半径
+    })
+
+    // 把矩形放到层里面去
+    layer.add(innerRect)
+
+    // 绘制进度条的外边框
+    var outerRect = new Konva.Rect({
+        x: x,
+        y: y,
+        width: maxWidth,
+        height: height,
+        stroke: "blue",//如果设置了stroke进行描边
+        strokeWidth: 4,
+        // fill: "green",//如果设置了fill就进行填充
+        cornerRadius: height / 2
+    })
+    layer.add(outerRect)
+
+    // 把层放到舞台
+    stage.add(layer)//或者layer.draw()，两种写法都可以
+
+    // 加载图片的进度条
+    // var loadImgIndex = 0
+    // var imgSrcArray = ['1.png', '2.png']//假设这是两张图片，作为一个例子
+    // for (var i = 0; i < imgSrcArray.length; i++) {
+    //     var img = new Image()
+    //     img.src = imgSrcArray[i]
+    //     img.onload = function () {
+    //         loadImgIndex += 1
+    //         innerRect.to({// konva的进度条动画实现
+    //             width: maxWidth * (loadImgIndex / imgSrcArray.length),
+    //             duration: 1.4,
+    //             easing: Konva.Easings.StrongEaseInOut,//动画的强度
+    //         })
+    //     }
+    // }
+
+    innerRect.to({// konva的进度条动画实现
+        width: maxWidth ,
+        duration: 5,
+        easing: Konva.Easings.StrongEaseInOut,//动画的强度
+    })
+</script>
+
+</body>
+</html>

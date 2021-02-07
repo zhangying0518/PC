@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>位移画布和旋转缩放</title>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+<script>
+    (function (){
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 600
+        canvas.style.border = "1px solid red"
+
+        ctx.fillStyle = 'red'
+
+        // 位移
+        ctx.save()//把最初的上下文保存起来
+        ctx.translate(200,200)//相对于原画布，把新画布移动到200,200
+        ctx.rotate(30 * Math.PI / 180)//把画布旋转30度，这里用弧度
+        ctx.scale(2,2)//把画布和画布上的矩形一起放大2倍，参数1是x轴，参数2是y轴
+        ctx.globalAlpha = .3//设置透明度
+        ctx.moveTo(0,0)
+        ctx.lineTo(400,0)
+        ctx.moveTo(0,0)
+        ctx.lineTo(0,400)
+        ctx.stroke()
+        ctx.fillRect(10,10,40,40)
+        ctx.restore()//回到位移旋转等状态之前，也就是回到保存的那个上下文去，为了和面的绘制不受旋转位移的影响 必须配合ctx.save()使用,
+
+        ctx.fillRect(400,400,100,100)
+
+
+    }())
+</script>
+</body>
+</html>

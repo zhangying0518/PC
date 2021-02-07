@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基础</title>
+    <style>
+        /*不要这样设置样式*/
+        #demo{
+            /*width: 1200px;*/
+            /*height: 1200px;*/
+        }
+    </style>
+</head>
+<body>
+<!--    设置canvas标签的宽高一般通过标签的属性进行设置，不要通过css设置-->
+    <canvas id="demo" width="600" height="600">
+        ie9以上才支持canvas标签，如果浏览器不支持，那么就会显示canvas标签里面的文本，如果支持就会执行canvas的js代码
+        你的浏览器太垃圾了了，请升级浏览器，哈哈哈哈
+    </canvas>
+    <script>
+        // 1.拿到canvas标签
+        var canvas = document.getElementById("demo")
+        canvas.style.border = "1px solid red"
+        // canvas.width = 600//可以这样设置宽
+        // canvas.height = 600//可以这样设置高
+        // canvas.style.height = 1200//千万别这样玩
+
+        // 2.拿到canvas的上下文
+        var ctx = canvas.getContext('2d') //'webgl'表示3d
+
+        // 3.绘制
+        // moveTo(x0,y0)第一个参数是x点坐标，第二个参数是y点坐标
+        ctx.moveTo(100,100)//把画笔移动到100,100的点
+        ctx.lineTo(200,100)//从画笔的位置画一条直线到200,100
+        ctx.lineTo(100,200)//从当前位置，再画一条直线到100,200
+        // ctx.lineTo(100,100)
+        ctx.closePath()//闭合路径，这里和ctx.lineTo(100,100)的效果一样
+
+        ctx.lineWidth = 4//设置描的边的粗细
+        ctx.strokeStyle = "blue"//给描的边加颜色，一定要放在ctx.stroke()之前
+        ctx.stroke()//描边的意思。
+        ctx.fillStyle = "green"//改变填充颜色
+        ctx.fill()//填充,默认是黑色
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>序列帧动画</title>
+</head>
+<body>
+<div id="container">
+    <canvas id="cavsElem">
+        你的浏览器太垃圾了，请升级你的浏览器
+    </canvas>
+</div>
+<button id="left">左</button>
+<button id="right">右</button>
+<button id="up">后</button>
+<button id="down">前</button>
+<script>
+    (function (){
+        var canvas = document.getElementById("cavsElem")
+        var ctx = canvas.getContext('2d')
+        canvas.width = 600
+        canvas.height = 400
+        canvas.style.border = "1px solid red"
+
+        var dirIndex = 0
+        var img = new Image()
+        img.src = "imgs/DMMban.png"
+        img.onload = function (){
+            var frameIndex = 0
+            setInterval(function (){
+                // ctx.clearRect()表示从0,0位置开始清除画布上的所有宽和高
+                ctx.clearRect(0,0,canvas.width,canvas.height)
+                // ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height)//参数1是要绘制的图片，
+                // 参数2,3是裁剪的左上角的坐标，也就是从哪个点开始剪裁，参数4，5是裁剪图片的宽高，后面的和上面的五个参数时的后四个对应
+                ctx.drawImage(img,frameIndex*40,dirIndex*65,40,65,200,200,80,65*2)
+                frameIndex ++
+                frameIndex = frameIndex % 4
+            },1000/10)//表示一秒绘制10次
+        }
+
+        // 绑定按钮的点击事件
+        var left = document.getElementById("left")
+        var right = document.getElementById("right")
+        var up = document.getElementById("up")
+        var down = document.getElementById("down")
+        left.onclick = function (){
+            dirIndex = 1
+        }
+        right.onclick = function (){
+            dirIndex = 2
+        }
+        up.onclick = function (){
+            dirIndex = 3
+        }
+        down.onclick = function (){
+            dirIndex = 0
+        }
+    }())
+</script>
+</body>
+</html>

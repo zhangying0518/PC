@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+
+    }
+
+    .box {
+      width: 180px;
+      height: 110px;
+      border: 1px solid #086ccd;
+      margin: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="boxlist"></div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    var pageobj = {
+      box_width: 180,
+      row_num: 5,
+      col_num: 0,
+      init: function () {
+        pageobj.buildBox();
+      },
+      buildBox: function () {
+        var win_width = $(window).width();
+        this.col_num = Math.floor(win_width / this.box_width);
+        var row_str = '';
+        for (var r = 0; r < this.row_num; r++) {
+          row_str += '<div class="row">';
+          var col_str = "";
+          for (var c = 0; c < this.col_num; c++) {
+            col_str += '<div class="box"></div>';
+          }
+          row_str += col_str;
+          row_str += '</div>';
+        }
+        $('#boxlist').html(row_str);
+
+        this.setPoint();
+      },
+      setPoint: function () {
+        var half_col = Math.ceil(this.col_num / 2);
+        var mod_col = this.col_num % 2 == 0;
+        var mid_row = Math.ceil(this.row_num / 2);
+
+        var total_num = this.row_num * this.col_num;
+
+        /* var first_x = mid_row * this.col_num - half_col;
+        this.fillNum(first_x);
+
+        var next_x = first_x - this.col_num;
+        this.fillNum(next_x); */
+
+        // 行跳动规则
+        var row_rule = [0, 1, -1, 2, -2];
+
+        var col_rule = [0, 1, -1, 2, -2, 3, -3, 4, -4];
+        if (mod_col) {
+          col_rule = [0, -1, 1, -2, 2, -3, 3, -4, 4];
+        }
+
+        var startNum = 1;
+        for (var cc = 0; cc < this.col_num; cc++) {
+          var temp_y = half_col - col_rule[cc];
+
+          for (var i = 0; i < this.row_num; i++) {
+            var temp_x = (mid_row + row_rule[i]) * this.col_num;
+            var temp_index = temp_x - temp_y;
+            this.fillNum(temp_index, startNum++);
+          }
+        }
+      },
+      fillNum: function (index, num) {
+        $('.box').eq(index).html(num); //.before('<span>' + index + '</span>');
+      }
+    };
+
+    $(function () {
+      pageobj.init();
+    });
+
+    $(window).resize(function () {
+      pageobj.init();
+    })
+  </script>
+</body>
+
+</html>
