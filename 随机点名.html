@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>点名器</title>
+ <style>
+  body{
+   background-color: gray;
+  }
+  .box{
+   width: 1000px;
+   height: 280px;
+   margin: 0 auto;
+   margin-top: 100px;
+   clear: both;
+  }
+  #btn,#btnStop{
+   width: 150px;
+   height: 50px;
+   margin-top: 50px;
+   font-size: 18px;
+  }
+  .name{
+   width: 100px;
+   height: 30px;
+   float: left;
+   background-color: antiquewhite;
+   margin-left: 10px;
+   margin-top: 10px;
+   text-align: center;
+   line-height: 30px;
+  }
+  #span{
+   float: right;
+   position: relative;
+   top: 55px;
+   right: 185px;
+  }
+  h1{
+   text-align: center;
+  }
+ </style>
+</head>
+<body>
+<h1>随机点名</h1>
+<div class="box" id="box"></div>
+<div style="text-align: center">
+ <input type="button" id="btn" value="点名"/>
+ <input type="button" id="btnStop" value="停止"/>
+</div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+ var arr = [ "张恒",
+  "李伟",
+  "文子昂",
+  "李彦松",
+  "廖彬",
+  "金鑫",
+  "夏华伶",
+  "邓洪",
+  "陈紫桥",
+  "罗继财",
+  "陈治豪",
+  "李坤耀",
+  "母天鑫",
+  "冯思皓",
+  "谷康杰",
+  "李辉",
+  "李先进",
+  "米俊杰",
+  "彭小平",
+  "唐旭",
+  "万云松",
+  "向星宇",
+  "张全鑫",
+  "邬建科",
+  "徐江涛",
+  "李连辉",
+  "肖云龙",
+  "徐浪",
+  "马俊杰",
+  "欧阳平",
+  "周雨凡"];
+ // 获取类名为box的盒子
+ let boxNode = document.getElementById("box");
+ //循环遍历数组
+ for(let i = 0;i< arr.length;i++){
+  //创建div元素
+  let divNode = document.createElement("div");
+  //设置div内容
+  divNode.innerHTML = arr[i];
+  //设置div样式
+  divNode.className = "name";
+  //将div添加到box元素中
+  boxNode.appendChild(divNode);
+ }
+ let time = null
+ var index1 = ""
+ //点击开始点名,开启一个循环定时器,绑定鼠标单击事件
+ $("#btn").click(function () {
+ 	if(time==null){
+ 		time = setInterval(function () {
+   		// 设置随机点到的人的名字的下标
+	    let index = Math.floor(Math.random()*arr.length);
+	    index1 = index
+	    //清除div之前的颜色
+	    $("#box div").css("background-color","");
+	     //随机被选中的div设置背景颜色为红色
+	    $('#box div').eq(index).css("background-color","red");
+	  },40);
+ 	}
+ });
+
+function increaseProbability(){//增加某个人被点到的概率
+    let index = Math.floor(Math.random()*arr.length);
+    if(index1<10){
+    	index = 1
+    }
+    $("#box div").css("background-color","");
+    $('#box div').eq(index).css("background-color","red");
+}
+ //点击停止按钮清除定时器
+ $("#btnStop").click(function () {
+ 	if(time!==null){
+		// increaseProbability()
+    	clearInterval(time);
+   		time = null
+ 	}
+ })
+</script>
+</html>
